@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col">
+		<form class="form-group form-inline d-flex justify-content-center" id="food-form">
+			<input type="text" id="food-name" class="form-control" placeholder="Enter Food Name ..." aria-label="Enter Food Name ...">
+			<span class="input-group-btn">
+				<button class="btn btn-success" id="add-food" type="submit">Add</button>
+			</span>
+		</form>
+	</div>
+</div>	
+{{#unless foods}}
+<div class="row mt-2" id="empty-message">
+	<div class="col">
+		<div class="alert alert-primary">
+			You have not had any meals yet.
+		</div>
+	</div>
+</div>
+{{/unless}}
+<div class="row">
+	<div class="col-sm-6">
+		<h4>Ready to eat food</h4>
+	
+		<div class="list-group" id="foods-to-eat">
+			{{#each foods}}
+				{{#unless eaten}}
+				{{> foods/food-block eat=true}}
+				{{/unless}}
+			{{/each}}					
+		</div>			
+	</div>
+	<div class="col-sm-6">
+		<h4>Food you've eaten</h4>
+
+		<div class="list-group" id="foods-eaten">
+			{{#each foods}}
+				{{#if eaten}}
+				{{> foods/food-block eat=false}}
+				{{/if}}
+			{{/each}}
+		</div>		
+	</div>
+</div>
