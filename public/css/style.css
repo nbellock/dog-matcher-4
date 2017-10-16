@@ -260,7 +260,7 @@ a:hover {
   margin-bottom: 25px;
 }
 
-.breed input, .dog-name input, .zip input {
+input[type=text], [type=password] {
  	width: 300px;
  	height: 30px;
 }

@@ -69,13 +69,13 @@ module.exports = function(sequelize, DataTypes) {
       updatedAt: DataTypes.DATE
   });
 
-  // Dog.associate = function(models) {
-  //   Dog.belongsTo(models.Owner, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+ //Dog.associate = function(models) {
+ //  Dog.belongsTo(models.Owner, {
+  //  foreignKey: {
+ //   allowNull: false
+ //       }
+  //     });
+  //   };
 
   return Dog;
 };
