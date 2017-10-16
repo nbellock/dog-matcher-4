@@ -10,7 +10,7 @@
           <p class="success-message"></p>
         </form>
         <div class="wrap">
-          <form action="api/new" method="POST">
+          <form id="dogSurvey" name="dog-survey" action="api/new" method="POST">
             <label class="statement dog-name">What is your dog's name?</label>
             <ul class='q1 dog-name'>
               <input type="text" name="name" required></li>
@@ -117,6 +117,39 @@
 $("#upload-image").on("click", function() {
   $(".success-message").html("Image uploaded successfully!");
 });
+
+console.log($("#choose-file").val());
+
+// $("#dogSurvey").on("submit", function(event) {
+//   event.preventDefault();  
+//   var answers = {
+//     name: 
+//     breed:
+//     zip:
+//     gender:
+//     likert: {
+
+//       for (var i = 0; i < q[number].length; i++) {
+//         q[number][i]
+//       }
+//     }
+
+//   };
+
+//     $()
+
+//   $.ajax({
+//     url: "/api/photo", 
+//     method: "post", 
+//     data: 
+
+
+//   });
+
+// });
+
+
+
 
 
 </script>

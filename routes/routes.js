@@ -33,7 +33,7 @@ module.exports = function(app) {
   });
 
 
-var currentDogImage;
+var filename;
   app.post("/api/new", function(req, res) {
 
     db.Dog.create({
@@ -49,34 +49,53 @@ var currentDogImage;
       bark: req.body.q10,
       independence: req.body.q11,
       weight: req.body.q12,
-      image: currentDogImage
+      image: filename
     }).then(function(newDog) {
       res.redirect("/finddog"); 
     });
   });
 
 
-var multer = require('multer');
-var storage =  multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
-  }
+
+app.post("/api/photo/", function(req, res) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let currentDogImage = req.files.userPhoto;
+  filename = req.files.userPhoto.name;
+  console.log(filename);
+  console.log(currentDogImage);
+ 
+  // Use the mv() method to place the file somewhere on your server
+  currentDogImage.mv('./uploads/' + filename, function(err) {
+ 
+    res.redirect("/listdog");
+  });
 });
-var upload = multer({ storage : storage}).single('userPhoto');
+
+// var multer = require('multer');
+// var storage =  multer.diskStorage({
+//   destination: function (req, file, callback) {
+//     callback(null, './uploads');
+//   },
+//   filename: function (req, file, callback) {
+//     callback(null, file.fieldname + '-' + Date.now());
+//   }
+// });
+// var upload = multer({ storage : storage}).single('userPhoto');
 
 
-app.post('/api/photo',function(req,res){
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        currentDogImage = req.file.path;
-       return res.redirect("/listdog");
-    });
-});
+// app.post('/api/photo',function(req,res){
+//     upload(req,res,function(err) {
+//         if(err) {
+//             return res.end("Error uploading file.");
+//         }
+//         currentDogImage = req.file.filename;
+//         // console.log(req.file);
+//         res.redirect("/listdog");
+//     });
+// });
 
 app.put("/api/dogs/:id", function(req, res) {
   db.Dog.update({

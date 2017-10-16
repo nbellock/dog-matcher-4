@@ -1,3 +1,4 @@
+<div class="container">
 <div class = "row">	 
 	 <div id="filter-dogs-block">
     <h4>Filter Dogs by Breed:</h4>
@@ -93,11 +94,9 @@
 			<p class="dog-listing-title">{{owner_name}} | Breed: {{breed}}</p>
 			<p>Treats: {{treats}}</p>
 
-			<!-- Handlebars Image Template-->
-			<div id="image-template" style="display: none">
-				<img class="dog-image" src="../{{this.image}}.jpg">
-			</div>
-			<div class="compiled-image"></div>
+				<img class="dog-image" src="../uploads/{{this.image}}">
+
+{{!-- 			<div class="compiled-image"></div> --}}
 
 			<button class="view-profile btn btn-info btn-md dog-listing-btn" data-toggle="modal" data-target="#dogModal-{{id}}"><i class="fa fa-paw" aria-hidden="true"></i></button>
 			<button class="btn btn-info btn-md dog-listing-btn favorite-btn" data-favoriteid="{{id}}"><i class="fa fa-heart" aria-hidden="true"></i></button>
@@ -118,7 +117,7 @@
 	      </div>
 		    <div class="modal-body">
 
-					<img class= "dog-image" src='{{image}}.jpg'>
+					<img class= "dog-image" src="../uploads/{{image}}">
 
 					<ul class="chart">
 						<p class="chart-key">0% = Low | 25% = Moderate | 50% = Average | 75% = Above Avg | 100% = High
@@ -168,6 +167,7 @@
 
 	{{/each}}
 </div> <!-- End Row -->
+</div>
 
 <footer class="main-footer"></footer>
 
@@ -198,18 +198,18 @@ $(".treat-btn").on("click", function() {
 </script>
 
 <script id="image-template" type="text/x-handlebars-template">
-    <img class="dog-image" src="../{{image}}">
+{{!--     <img class="dog-image" src="../uploads{{image}}"> --}}
 </script>
 
 <script>
-$(document).ready(function() {
-	var imageTemplate = $("#image-template").html().trim();
-	console.log("imageTemplate: ", imageTemplate);
-	// Handlebars.compile(imageTemplate);
+// $(document).ready(function() {
+// 	var imageTemplate = $("#image-template").html().trim();
+// 	console.log("imageTemplate: ", imageTemplate);
+// 	// Handlebars.compile(imageTemplate);
 
-	var compiledImageTemplate = Handlebars.compile(imageTemplate);
-	$(".compiled-image").html(compiledImageTemplate());
-});
+// 	var compiledImageTemplate = Handlebars.compile(imageTemplate);
+// 	$(".compiled-image").html(compiledImageTemplate());
+// });
 </script>
 
 
