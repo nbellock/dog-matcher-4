@@ -7,6 +7,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var Handlebars = require('handlebars');
 
 // Sets up the Express App
 // =============================================================
@@ -25,6 +26,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+
 // Static directory
 app.use(express.static("public"));
 
@@ -34,7 +36,7 @@ require("./routes/routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

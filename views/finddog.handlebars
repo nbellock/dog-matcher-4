@@ -1,0 +1,215 @@
+<div class = "row">	 
+	 <div id="filter-dogs-block">
+    <h4>Filter Dogs by Breed:</h4>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Basset Hound</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Beagle</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Bulldog</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Dalmation</label>
+      </div>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Doberman</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Cockapoo</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Collie</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Foxhound</label>
+      </div>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">German Shepherd</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Golden Retriever</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Goldendoodle</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Greyhound</label>
+      </div>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Maltese</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Mutt</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Pit Bull</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Pomeranian</label>
+      </div>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Poodle</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Portuguese Water Dog</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Pug</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Saint Bernard</label>
+      </div>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Shih Tzu</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Siberian Husky</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Welsh Terrier</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Yorkshire Terrier</label>
+      </div>
+    </div>
+</div>
+
+<div class="row all-dogs-listings">
+	{{#each dogdata}}
+		<div class="col-md-3 dog-listing" id={{id}}>
+			<p class="dog-listing-title">{{owner_name}} | Breed: {{breed}}</p>
+			<p>Treats: {{treats}}</p>
+
+			<!-- Handlebars Image Template-->
+			<div id="image-template" style="display: none">
+				<img class="dog-image" src="../{{this.image}}.jpg">
+			</div>
+			<div class="compiled-image"></div>
+
+			<button class="view-profile btn btn-info btn-md dog-listing-btn" data-toggle="modal" data-target="#dogModal-{{id}}"><i class="fa fa-paw" aria-hidden="true"></i></button>
+			<button class="btn btn-info btn-md dog-listing-btn favorite-btn" data-favoriteid="{{id}}"><i class="fa fa-heart" aria-hidden="true"></i></button>
+			<button class="btn btn-info btn-md dog-listing-btn follow-btn" data-followid="{{id}}"><span class="glyphicon glyphicon-plus-sign"></span></button>
+			<button class="btn btn-info btn-md dog-listing-btn treat-btn" data-treatid="{{id}}" data-treats="{{treats}}">Give Treat</button>
+		</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="dogModal-{{id}}" role="dialog">
+	  <div class="modal-dialog">
+	              
+	  <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+	        <h2 class="modal-title">{{this.owner_name}}</h2>
+	        <h4 class="modal-title">Breed: {{this.breed}} | Location: {{location}}</h4>
+	      </div>
+		    <div class="modal-body">
+
+					<img class= "dog-image" src='{{image}}.jpg'>
+
+					<ul class="chart">
+						<p class="chart-key">0% = Low | 25% = Moderate | 50% = Average | 75% = Above Avg | 100% = High
+					  <li>
+					    <span style="width:{{this.shedding}}%" title="Amount of Shedding: {{this.shedding}}%"></span>
+					  </li>
+					  <li>
+					    <span style="width:{{this.energy}}%" title="Energy Level: {{this.energy}}%"></span>
+					  </li>
+					  <li>
+					    <span style="width:{{this.trainability}}%" title="Trainability: {{this.trainability}}%"></span>
+					  </li>
+					  <li>
+					    <span style="width:{{this.kid}}%" title="Kid Friendly: {{this.kid}}%"></span>
+					  </li>
+				  	<li>
+					    <span style="width:{{this.groom}}%" title="Easy to Groom: {{this.groom}}%"></span>
+					  </li>
+				  	<li>
+					    <span style="width:{{this.drool}}%" title="Likeliness to Drool: {{this.drool}}%"></span>
+					  </li>
+				  	<li>
+					    <span style="width:{{this.bark}}%" title="Likeliness to Bark: {{this.bark}}%"></span>
+					  </li>
+				  	<li>
+					    <span style="width:{{this.independence}}%" title="Independence Level: {{this.independence}}%"></span>
+					  </li>
+				  	<li>
+					    <span style="width:{{this.weight}}%" title="*Approximate Weight: {{this.weight}}%"></span>
+					  </li>
+					</ul>    
+					<ul class="weight-key">*Where: 
+						<li>0% = Toy Dog (0-20lbs)</li>
+						<li>25% = Small Dog (21-40lbs)</li>
+						<li>50% = Medium Dog (41-65lbs)</li>
+						<li>75% = Large Dog (66-89lbs)</li>
+						<li>100% = Very Large Dog (90+lbs)</li>
+					</ul>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn btn-default close-modal" data-dismiss="modal">Close</button>
+		    </div>
+	    </div>
+	            
+		</div>
+	</div>
+
+	{{/each}}
+</div> <!-- End Row -->
+
+<footer class="main-footer"></footer>
+
+<script>
+
+$(".treat-btn").on("click", function() {
+		var id = $(this).data("treatid");
+		// console.log("id ", id);
+		var currentTreats = $(this).data("treats");
+		// console.log("currentTreats ", currentTreats);
+		var addedTreats = (currentTreats + 1);
+		// console.log("addedTreats ", addedTreats);
+
+		var updatedTreats = {
+			treats: addedTreats
+		};
+
+		$.ajax("/api/dogs/" + id, {
+			type: "PUT",
+			data: updatedTreats
+		}).then(function() {
+			console.log("updated id ", id);
+			location.reload();
+			});
+});
+
+
+</script>
+
+<script id="image-template" type="text/x-handlebars-template">
+    <img class="dog-image" src="../{{image}}">
+</script>
+
+<script>
+$(document).ready(function() {
+	var imageTemplate = $("#image-template").html().trim();
+	console.log("imageTemplate: ", imageTemplate);
+	// Handlebars.compile(imageTemplate);
+
+	var compiledImageTemplate = Handlebars.compile(imageTemplate);
+	$(".compiled-image").html(compiledImageTemplate());
+});
+</script>
+
+

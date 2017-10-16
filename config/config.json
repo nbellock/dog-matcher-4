@@ -1,15 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": "MySQL",
-    "database": "eat_db",
+    "password": "",
+    "database": "dogs_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "eat_db",
+    "database": "dogs_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

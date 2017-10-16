@@ -1,43 +1,33 @@
-<div class="row">
-	<div class="col">
-		<form class="form-group form-inline d-flex justify-content-center" id="food-form">
-			<input type="text" id="food-name" class="form-control" placeholder="Enter Food Name ..." aria-label="Enter Food Name ...">
-			<span class="input-group-btn">
-				<button class="btn btn-success" id="add-food" type="submit">Add</button>
-			</span>
-		</form>
-	</div>
-</div>	
-{{#unless foods}}
-<div class="row mt-2" id="empty-message">
-	<div class="col">
-		<div class="alert alert-primary">
-			You have not had any meals yet.
-		</div>
+<div container="container-fluid">
+	<div class ="index-background"></div>
+	<div id="text-overlay">
+		<h2>There's no doubt that dogs make the best company.</h2>
+		<p>However, the alarming fact is that approximately 3.9 million dogs are abandoned each year.* Dogspotter's mission is to educate and better connect humans with dogs in the effort to decrease this number. Allow us to help you discover the breed that fits your lifestyle, or help us help others by creating a profile for your dog. </p>
+		<button class="main-button"><a href="/usersurvey">Get Matched</a></button>
+		<button class="main-button" data-toggle="modal" data-target="#join">Create a Dog Profile</button>
+		<p class="source">*Source: <a href="https://www.dosomething.org/facts/11-facts-about-animal-homelessness" target="_blank">DoSomething.org</a></p>
 	</div>
 </div>
-{{/unless}}
-<div class="row">
-	<div class="col-sm-6">
-		<h4>Ready to eat food</h4>
-	
-		<div class="list-group" id="foods-to-eat">
-			{{#each foods}}
-				{{#unless eaten}}
-				{{> foods/food-block eat=true}}
-				{{/unless}}
-			{{/each}}					
-		</div>			
-	</div>
-	<div class="col-sm-6">
-		<h4>Food you've eaten</h4>
 
-		<div class="list-group" id="foods-eaten">
-			{{#each foods}}
-				{{#if eaten}}
-				{{> foods/food-block eat=false}}
-				{{/if}}
-			{{/each}}
-		</div>		
-	</div>
-</div>
+  <!-- Modal -->
+  <div class="modal fade" id="join" role="dialog">
+    <div class="modal-dialog">
+                
+    <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+          <h2 class="modal-join-title">Join the Movement</h2>
+        </div>
+        <div class="modal-body">
+          <p>Please create an account in order to create a dog profile.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default close-modal" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+              
+    </div>
+  </div>
+
+
