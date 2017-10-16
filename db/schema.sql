@@ -1,3 +1,7 @@
+create database dogs_db;
+use dogs_db;
+
+
 CREATE TABLE ownerdata
 (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -7,31 +11,46 @@ CREATE TABLE ownerdata
     lastname varchar(50) NOT NULL,
     email varchar(50) NOT NULL,
     address varchar(50),
-    createdAt TIMESTAMP NOT NULL,
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE dogdata
+CREATE TABLE Dogs
 (
 	id INT AUTO_INCREMENT NOT NULL ,
     owner_name varchar(50) NOT NULL,
     breed varchar(50) NOT NULL,
-	weight int NOT NULL DEFAULT 0,
+    location varchar(5),
+    treats int(50) DEFAULT 0,
     shedding int NOT NULL DEFAULT 0,
     energy int NOT NULL DEFAULT 0,
     trainability int NOT NULL DEFAULT 0,
     kid	int NOT NULL DEFAULT 0,
-    groom_interval int NOT NULL DEFAULT 0,
-    groom_metric int NOT NULL DEFAULT 0,
-    hypoallergenic boolean NOT NULL DEFAULT false,
+    groom int NOT NULL DEFAULT 0,
+    drool int NOT NULL DEFAULT 0,
     bark int NOT NULL DEFAULT 0,
     independence int NOT NULL DEFAULT 0,
-	lifespan int NOT NULL DEFAULT 0,
-    adoptable boolean NOT NULL DEFAULT false,
-    image varchar(45),
-    createdAt TIMESTAMP NOT NULL,
+    weight int NOT NULL DEFAULT 0,
+    image varchar(50),
     
 	PRIMARY KEY(id)
 );
 
-Select * from dogdata;
+CREATE TABLE Users
+(
+    id INT AUTO_INCREMENT NOT NULL ,
+    name varchar(50) NOT NULL,
+    location varchar(5),
+    shedding int NOT NULL DEFAULT 0,
+    energy int NOT NULL DEFAULT 0,
+    trainability int NOT NULL DEFAULT 0,
+    kid int NOT NULL DEFAULT 0,
+    groom int NOT NULL DEFAULT 0,
+    drool int NOT NULL DEFAULT 0,
+    bark int NOT NULL DEFAULT 0,
+    independence int NOT NULL DEFAULT 0,
+    weight int NOT NULL DEFAULT 0,
+    
+    PRIMARY KEY(id)
+);
+
+Select * from Dogs;
