@@ -1,15 +1,15 @@
 <div class="container text-left">
 <div class = "col-lg-12">
-  <form method="post" action="/api/login?_method=GET">
+  <form method="POST" action="/api/login">
     <h2 class = "text-center survey-header">Please Log In before beginning the site</h2>
 
 
     <div class = "wrap">
       <label class = "statement"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="text" placeholder="Enter Username" name="username" required>
 
       <label class = "statement"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" name="password" required>
       
       <br>
       <button type="submit" class="btn btn-lg btn-primary" id="submit" data-toggle="modal">Register</button>

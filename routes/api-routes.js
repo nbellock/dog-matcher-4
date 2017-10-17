@@ -94,7 +94,7 @@ app.post('/api/newOwner', function(req, res) {
     email: req.body.email,
     address: req.body.address
      }).then(function() {
-      res.redirect(307, "/");
+      res.redirect("/");
     }).catch(function(err) {
       console.log(err);
       res.json(err);
@@ -102,19 +102,9 @@ app.post('/api/newOwner', function(req, res) {
     });
   });
 
-  app.get("/api/login", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    }
-    else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-       res.redirect("/")
-    }
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+      console.log("authRoute")
+      res.redirect("/usersurvey");
   });
 
   // //dormant api
