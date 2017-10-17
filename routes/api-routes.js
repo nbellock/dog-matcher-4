@@ -1,4 +1,5 @@
 var db = require("../models");
+var passport = require("../config/passport");
 var fs = require("fs");
 
 module.exports = function(app) {
@@ -62,7 +63,7 @@ app.put("/api/dogs/:id", function(req, res) {
     });
   });
 
-app.post('/api/newsurvey',function(req,res){
+app.post('/api/newsurvey', function(req,res){
 
     db.User.create({
       name: req.body.name,
@@ -82,6 +83,39 @@ app.post('/api/newsurvey',function(req,res){
 
 });
 
+app.post('/api/newOwner', function(req, res) {
+  console.log(req.body);
+
+  db.OwnerData.create({
+    username: req.body.uname,
+    password: req.body.psw, 
+    firstname: req.body.fn,
+    lastname: req.body.ln,
+    email: req.body.email,
+    address: req.body.address
+     }).then(function() {
+      res.redirect(307, "/");
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
+
+  app.get("/api/login", passport.authenticate("local"), function(req, res) {
+    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+    // So we're sending the user back the route to the members page because the redirect will happen on the front end
+    // They won't get this or even be able to access this page if they aren't authed
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    }
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+       res.redirect("/")
+    }
+  });
 
   // //dormant api
   // app.get("/api/foods/:id", function(req, res) {

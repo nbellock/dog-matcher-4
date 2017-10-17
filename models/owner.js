@@ -21,7 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true
+            }
         },
         address: {
             type: DataTypes.STRING,
@@ -35,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
      Owner.hook("beforeCreate", function(user) {
-    owner.password = bcrypt.hashSync(owner.password, bcrypt.genSaltSync(10), null);
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
     Owner.associate = function(models) {
     // Associating Owner with Dogs
