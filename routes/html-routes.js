@@ -8,11 +8,11 @@ module.exports = function(app){
     res.render("index");
   });
 
-  app.get("/usersurvey", isAuthenticated, function(req, res) {
+  app.get("/usersurvey", function(req, res) {
     res.render("usersurvey");
   });
 
-  app.get("/finddog", isAuthenticated, function(req, res) {
+  app.get("/finddog", function(req, res) {
 
     // res.render("index");
     db.Dog.findAll({}).then(function(result) {
