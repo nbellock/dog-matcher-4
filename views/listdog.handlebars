@@ -4,13 +4,37 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center survey-header">Create Your Dog's Profile</h2>
-        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
-          <input type="file" name="userPhoto" id="choose-file"/>
-          <input type="submit" value="Upload Image" id="upload-image" name="submit">
-          <p class="success-message"></p>
-        </form>
         <div class="wrap">
-          <form action="api/new" method="POST">
+
+          <div class="row">
+            <div class="col-sm-6 col-md-offset-3">
+              <form id="uploadForm" enctype="multipart/form-data" class="form-group">
+                <label class="">Select an image for upload</label>
+                <div class="input-group">
+                  <label class="input-group-btn">
+                    <span class="btn btn-primary">
+                      Browse&hellip; <input type="file" name="userPhoto" id="choose-file" style="display: none;" single>
+                    </span>
+                  </label>
+                  <input type="text" name="filename-text" class="form-control" readonly required />
+                  <span class="input-group-btn">
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="button" id="upload-image" class="btn btn-primary">Upload</button>
+                  </span>
+                </div>        
+                <hr>
+              </form>			
+            </div>
+          </div>
+
+          <div class="row" id="dog-preview-container">
+            <div class="col-sm-6 col-sm-offset-3">
+              <img id="dog-preview" src="" alt="" class="img-rounded img-responsive">
+            </div>
+          </div>
+
+          <form id="dog-profile" action="/api/new" method="POST">
+            <input type="hidden" value="" name="imagepath" id="imagepath" />
             <label class="statement dog-name">What is your dog's name?</label>
             <ul class='q1 dog-name'>
               <input type="text" name="name" required></li>
@@ -31,7 +55,7 @@
               <li><input type="radio" name="q4" value="100" required><label>Way too much</label></li>
               <li><input type="radio" name="q4" value="75" required><label>A lot</label></li>
               <li><input type="radio" name="q4" value="50" required><label>Average</label></li>
-              <li><input type="radio" name="q4" value="25" required><label>A litte</label></li>
+              <li><input type="radio" name="q4" value="25" required><label>A little</label></li>
               <li><input type="radio" name="q4" value="0" required><label>Not at all</label></li>
             </ul>
             <label class="statement">How active is your dog?</label>
@@ -111,12 +135,3 @@
 </div>
 
 <footer class="main-footer"></footer>
-
-<script>
-
-$("#upload-image").on("click", function() {
-  $(".success-message").html("Image uploaded successfully!");
-});
-
-
-</script>

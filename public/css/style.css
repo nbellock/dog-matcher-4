@@ -265,34 +265,6 @@ a:hover {
  	height: 30px;
 }
 
-#upload-image {
-	height: 30px;
-	border-radius: 5%;
-	border: 2px solid #063166;
-	background-color: #063166;
-	color: #fff;
-	margin-top: 15px;
-}
-
-#upload-image:hover {
-	background-color: #60c0dd;
-	border: 2px solid #60c0dd;
-}
-
-#choose-file {
-	height: 30px;
-	cursor: pointer;
-}
-
-#uploadForm input[type=file] {
-	font-size: 16px;
-	cursor: pointer;
-}
-
-#uploadForm {
-	margin-left: 4%;
-}
-
 #submit {
 	margin-left: 4%;
 }

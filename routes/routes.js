@@ -1,5 +1,6 @@
 var db = require("../models");
 var fs = require("fs");
+var surveyQs = require("../data/surveyQuestions");
 
 module.exports = function(app) {
   //select - from the food table interfaced by the Food model
@@ -8,7 +9,10 @@ module.exports = function(app) {
   });
 
   app.get("/usersurvey", function(req, res) {
-    res.render("usersurvey");
+    //questions is currently coming from a js data file, change here if questions will be stored in the database
+    var hbsObject = {questions:surveyQs};
+    console.log(hbsObject);
+    res.render("usersurvey", hbsObject);
   });
 
   app.get("/finddog", function(req, res) {
@@ -28,14 +32,40 @@ module.exports = function(app) {
     });
   });
 
+  //new profile
+  app.get("/newprofile/:id", function (req, res) {
+    var id = req.params.id;
+    db.Dog.findAll({where:{id:id}}).then(function(result) {
+      var hbsObject = {dogdata:[]};
+
+      for (var i=0; i < result.length; i++) {
+        hbsObject.dogdata.push(result[i].dataValues);
+      }
+      
+      res.render("newprofile", hbsObject.dogdata[0]);
+    });
+  })
+
+  //matches
+  app.get("/match/:id", function (req, res) {
+    var id = req.params.id;
+    db.Dog.findAll({where:{id:id}}).then(function(result) {
+      var hbsObject = {dogdata:[]};
+      
+      for (var i=0; i < result.length; i++) {
+        hbsObject.dogdata.push(result[i].dataValues);
+      }
+
+      res.render("match", hbsObject.dogdata[0]);
+    });
+
+  });
+
   app.get("/listdog", function(req, res) {
       res.render("listdog");
   });
 
-
-var currentDogImage;
   app.post("/api/new", function(req, res) {
-
     db.Dog.create({
       owner_name: req.body.name,
       breed: req.body.breed,
@@ -49,37 +79,25 @@ var currentDogImage;
       bark: req.body.q10,
       independence: req.body.q11,
       weight: req.body.q12,
-      image: currentDogImage
+      image: req.body.imagepath
     }).then(function(newDog) {
-      res.redirect("/finddog"); 
+      res.json({id:newDog.dataValues.id});
     });
   });
 
+  app.post("/api/photo/", function (req, res) {
+    if (!req.files) return res.status(400).send('No files were uploaded!');
 
-var multer = require('multer');
-var storage =  multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
-  }
-});
-var upload = multer({ storage : storage}).single('userPhoto');
-
-
-app.post('/api/photo',function(req,res){
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        currentDogImage = req.file.path;
-       return res.redirect("/listdog");
+    let currentDogImage = req.files.userPhoto;
+    var randomNum = Math.floor(Math.random() * 50000);
+    var filename = randomNum + req.files.userPhoto.name;
+    currentDogImage.mv('./public/uploads/' + filename, function (err) {
+      res.send(filename);
     });
-});
+  });
 
-app.put("/api/dogs/:id", function(req, res) {
-  db.Dog.update({
+  app.put("/api/dogs/:id", function(req, res) {
+    db.Dog.update({
       treats: req.body.treats
     }, {
       where: {
@@ -90,45 +108,82 @@ app.put("/api/dogs/:id", function(req, res) {
     });
   });
 
-app.post('/api/newsurvey',function(req,res){
+  app.post('/api/newsurvey', function(req, res) {
+    var respondentData = req.body;
+    var respondentArray = [];
+    var storeArray = [];
+    var diffArray = [];
+    var matchedDogID;
 
-    db.User.create({
-      name: req.body.name,
-      location: req.body.zip,
-      shedding: req.body.q3,
-      energy: req.body.q4,
-      trainability: req.body.q5,
-      kid: req.body.q6,
-      groom: req.body.q7,
-      drool: req.body.q8,
-      bark: req.body.q9,
-      independence: req.body.q10,
-      weight: req.body.q11
-    }).then(function(newSurvey) {
-      res.redirect("/finddog"); 
+    //make an array out of the survey likert questions which define a dogs properties
+    for (var i = 0; i < 9; i++) {
+      respondentArray.push(respondentData['q' + i]);
+    }
+    
+    //get data from the dogs table to compare to the survey data
+    db.Dog.findAll({}).then(function (data) {
+      //console.log(data);
+      
+      //convert all database returns to arrays which will be held in a general array (storeArray)
+      for (var i=0; i < data.length; i++) {
+        var dataUnit = []; //this array to be recreated on each loop ...
+
+        dataUnit.push(data[i].dataValues.shedding);
+        dataUnit.push(data[i].dataValues.energy);
+        dataUnit.push(data[i].dataValues.trainability);
+        dataUnit.push(data[i].dataValues.kid);
+        dataUnit.push(data[i].dataValues.groom);
+        dataUnit.push(data[i].dataValues.drool);
+        dataUnit.push(data[i].dataValues.bark);
+        dataUnit.push(data[i].dataValues.independence);
+        dataUnit.push(data[i].dataValues.weight);
+
+        // ... and then pushed to the main/general storage array (storeArray)
+        storeArray.push(dataUnit);
+      }
+
+      for (var i=0; i < storeArray.length; i++) {
+        var dogDiff = 0;
+        for (var j=0; j < respondentArray.length; j++) {
+            var userResp = respondentArray[j];
+            var dataResp = storeArray[i][j];
+
+            dogDiff += Math.abs(userResp - dataResp);
+        }
+        diffArray.push(dogDiff);
+      }      
+
+      //This gets us the index of the lowest value in diffArray 
+      //  - this index is generated in the second loop which matches the index of the most compatible friend in the friend array
+      var indexOfMinValue = diffArray.reduce((iMax, x, i, arr) => x < arr[iMax] ? i : iMax, 0);
+
+      //db id of the dog record that had the lowest deviance from the dogs table
+      matchedDogID = data[indexOfMinValue].dataValues.id;
+
+      //now we can record the user's survey response in the db
+      db.User.create({
+        name: req.body.name,
+        location: req.body.zip,
+        shedding: req.body.q3,
+        energy: req.body.q4,
+        trainability: req.body.q5,
+        kid: req.body.q6,
+        groom: req.body.q7,
+        drool: req.body.q8,
+        bark: req.body.q9,
+        independence: req.body.q10,
+        weight: req.body.q11
+      });    
+      
+      res.json({id:matchedDogID});
     });
+    
+  });
 
+//not necessary yet, questions are retrieved internally by a simple require statement
+app.get("/api/getsurvquestions", function (req, res) {
+  res.json(surveyQs);
 });
-
-
-  // //dormant api
-  // app.get("/api/foods/:id", function(req, res) {
-  //   db.Food.findOne({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(result) {
-  //     res.json(result);
-  //   });
-  // });
-
-  // //insert - req.body is created as JSON object passed over on the client side
-  // app.post("/api/foods", function(req, res) {
-  //   db.Food.create(req.body).then(function(result) {
-  //     res.json(result);
-  //   });
-  // });
-
   //update
   // app.put("/api/foods/:id", function(req,res) {
   //   db.Food.update({
@@ -143,15 +198,15 @@ app.post('/api/newsurvey',function(req,res){
   //   });
   // });
 
-  // //delete
-  // app.delete("/api/foods/:id", function(req, res) {
-  //   db.Food.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(result) {
-  //     res.json(result);
-  //   });
-  // });
+  //delete
+  app.delete("/api/deletedog/:id", function(req, res) {
+    db.Dog.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
+      res.json(result);
+    });
+  });
 
 };
