@@ -84,7 +84,6 @@ app.post('/api/newsurvey', function(req,res){
 });
 
 app.post('/api/newOwner', function(req, res) {
-  console.log(req.body);
 
   db.OwnerData.create({
     username: req.body.uname,
@@ -94,7 +93,7 @@ app.post('/api/newOwner', function(req, res) {
     email: req.body.email,
     address: req.body.address
      }).then(function() {
-      res.redirect("/");
+      res.redirect("/login");
     }).catch(function(err) {
       console.log(err);
       res.json(err);
@@ -102,9 +101,28 @@ app.post('/api/newOwner', function(req, res) {
     });
   });
 
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
-      console.log("authRoute")
-      res.redirect("/usersurvey");
+  app.get("/api/login", passport.authenticate("local"), function(req, res) {
+      res.redirect("/listdog");
+  });
+
+   app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    }
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        username: req.user.username,
+        id: req.user.id
+      });
+    }
+  });
+
+   app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
   });
 
   // //dormant api
