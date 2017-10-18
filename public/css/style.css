@@ -63,11 +63,29 @@ a:hover {
 }
 
 #myNavbar {
-/*	text-align: left;*/
+	text-align: left;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
+#profiles, #list {
+	display: none;
+}
+
+#login-side {
+	padding-left: 30px;
+}
+
+#login-side li {
+	color: #fff;
+	text-transform: capitalize;
+	font-size: 14px;
+}
 
 /*********** Main ***********/
+.show {
+	display: block;
+}
 
 #logo {
 	font-size: 50px;
@@ -78,12 +96,17 @@ a:hover {
 }
 
 .container {
-	height: 100%;
+	height: 100vh;
 }
 
+.col-md-3, .col-xs-12 {
+	padding-right: 2px;
+	padding-left: 2px;
+}
+ 
 .dog-image {
-	height: 200px;
-	width: 210px;
+	height: 180px;
+	width: 180px;
 	border: 2px solid #000;
 }
 
@@ -91,7 +114,15 @@ a:hover {
 	margin-top: 20px;
 }
 
-#filter-dogs-block {
+.filter-btn {
+	margin: -40px 0px 40px 15px;
+}
+
+.show-all-btn {
+	margin: -40px 0px 40px 0px;
+}
+
+#filter-dogs {
 	height: 200px;
 	margin-top: -35px;
 	margin-bottom: 5px;
@@ -99,16 +130,41 @@ a:hover {
 	background-color: #8caed8;
 }
 
+#filter-dogs input {
+	margin-right: 5px;
+}
+
+#filter-dogs label, #filter-dogs input {
+	cursor: pointer;
+}
+
+#filter-dogs ul {
+	height: 200px;
+	padding-top: 10px;
+	margin-left: -20px;
+	margin-right: 0;
+	width: 105%;
+}
+
+#filter-dogs li {
+	list-style: none;
+}
+
 .all-dogs-listings {
-	margin-top: 30px;
 	margin-bottom: 80px;
-	display: inline-block;
+	margin-left: 0;
+	margin-right: 0;
 	width: 100%;
-	float: left;
+}
+
+.dog-listing-col {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .dog-listing {
-	margin-top: 20px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .dog-listing-title {
@@ -119,15 +175,17 @@ a:hover {
 	margin-top: 8px;
 }
 
+.dog-filter-btn {
+	margin-top: 15px;
+	text-align: left;
+}
+
 .index-background {
-	background-image: url("https://static.pexels.com/photos/374845/pexels-photo-374845.jpeg");
-	height: 850px;
-	min-height: 100%;
-	max-height: 100%;
-	width: 115%;
+	background-image: url("../images/background_image.jpg");
+	width: 100%;
+	height: 100vh;
 	margin: 0 auto;
-	margin-top: -105px;
-	margin-left: -100px;
+	margin-top: -50px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -181,6 +239,27 @@ a:hover {
 	height: 100px;
 }
 
+.register-page, .login-page {
+	width: 50%;
+	max-width: 400px;
+}
+
+.register-page input, .login-page input {
+ 	width: 100%;
+ 	height: 40px;
+ 	padding-left: 5px;
+}
+
+.register-page #submit, .login-page #submit {
+	margin-left: 0;
+}
+
+.register-page .statement, .login-page .statement {
+	text-align: left;
+	margin-left: -4%;
+}
+
+
 
 /* MODAL BAR CHART
 /******************************************************/
@@ -200,11 +279,13 @@ a:hover {
   height: 200px;
   text-align: left;
 }
+
 .chart li {
   position: relative;
   display: table-row;
   vertical-align: left;
 }
+
 .chart span {
   margin: .75em 1em;
   display: block;
@@ -213,6 +294,7 @@ a:hover {
   animation: draw 1s ease-in-out;
   height: 35px;
 }
+
 .chart span:before {
   position: absolute;
   padding: 5px 1em 0;
@@ -328,4 +410,27 @@ form .likert li label {width:100%;} {
   padding:0 4.25%;
   text-align:right
 } 
+
+
+@media only screen and (max-width: 991px) {
+
+	#filter-dogs {
+		height: 280px;
+	}
+
+	.dog-listing {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+
+	#filter-dogs {
+		height: 400px;
+	}
+
+	.register-page, .login-page {
+		width: 90%;
+	}
+}
 

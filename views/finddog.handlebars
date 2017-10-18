@@ -1,108 +1,67 @@
-<div class = "row">	 
-	 <div id="filter-dogs-block">
-    <h4>Filter Dogs by Breed:</h4>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Basset Hound</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Beagle</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Bulldog</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Dalmation</label>
-      </div>
-    </div>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Doberman</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Cockapoo</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Collie</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Foxhound</label>
-      </div>
-    </div>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">German Shepherd</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Golden Retriever</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Goldendoodle</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Greyhound</label>
-      </div>
-    </div>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Maltese</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Mutt</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Pit Bull</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Pomeranian</label>
-      </div>
-    </div>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Poodle</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Portuguese Water Dog</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Pug</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Saint Bernard</label>
-      </div>
-    </div>
-    <div class="col-sm-2 col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Shih Tzu</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Siberian Husky</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Welsh Terrier</label>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Yorkshire Terrier</label>
-      </div>
-    </div>
+<div class="container">
+<div class = "row">	
+	<button type="button" class="btn btn-info filter-btn">Filter Dogs by Breed</button>
+	<button type="button" class="btn btn-info show-all-btn">Show All Breeds</button>
+	<div class="col-md-12 dog-filter-col">
+	 <form id="filter-dogs" name="filter-dogs">
+			<ul>
+				<div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="basset hound" class="dog">Basset Hound</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="beagle" class="dog">Beagle</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="boxer" class="dog">Boxer</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="bull dog" class="dog">Bull Dog</label></li>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="dalmation" class="dog">Dalmation</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="doberman" class="dog">Doberman</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="cockapoo" class="dog">Cockapoo</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="collie" class="dog">Collie</label></li>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="foxhound" class="dog">Foxhound</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="german shepherd" class="dog">German Shepherd</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="golden retriever" class="dog">Golden Retriever</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="goldendoodle" class="dog">Goldendoodle</label></li>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="greyhound" class="dog">Greyhound</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="maltese" class="dog">Maltese</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="mutt" class="dog">Mutt</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="pit bull" class="dog">Pit Bull</label></li>
+	      </div>
+	      <div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="pomeranian" class="dog">Pomeranian</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="poodle" class="dog">Poodle</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="portuguese water dog" class="dog">Portuguese Water Dog</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="pug" class="dog">Pug</label></li>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="saint bernard" class="dog">Saint Bernard</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="shih tzu" class="dog">Shih Tzu</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="siberian husky" class="dog">Siberian Husky</label></li>
+	        <li><label><input id="dogcheckbox" type="checkbox" name="dog" value="yorkshire terrier" class="dog">Yorkshire Terrier</label></li>
+       	</div>
+       <div class="col-md-12">
+       	<button type="button" class="btn btn-info dog-filter-btn">Submit</button>
+       </div>
+       </ul>
+		</form>
+	</div>
 </div>
 
 <div class="row all-dogs-listings">
+<div class="col-md-12 dog-listing-col">
 	{{#each dogdata}}
-		<div class="col-md-3 dog-listing" id={{id}}>
+		<div class="col-xs-12 col-md-3 dog-listing" id={{id}} data-dogBreed="{{breed}}">
 			<p class="dog-listing-title">{{owner_name}} | Breed: {{breed}}</p>
 			<p>Treats: {{treats}}</p>
 
-			<!-- Handlebars Image Template-->
-			<div id="image-template" style="display: none">
-				<img class="dog-image" src="../{{this.image}}.jpg">
-			</div>
-			<div class="compiled-image"></div>
+			<img class="dog-image" src="/uploads/{{image}}">
 
-			<button class="view-profile btn btn-info btn-md dog-listing-btn" data-toggle="modal" data-target="#dogModal-{{id}}"><i class="fa fa-paw" aria-hidden="true"></i></button>
-			<button class="btn btn-info btn-md dog-listing-btn favorite-btn" data-favoriteid="{{id}}"><i class="fa fa-heart" aria-hidden="true"></i></button>
-			<button class="btn btn-info btn-md dog-listing-btn follow-btn" data-followid="{{id}}"><span class="glyphicon glyphicon-plus-sign"></span></button>
-			<button class="btn btn-info btn-md dog-listing-btn treat-btn" data-treatid="{{id}}" data-treats="{{treats}}">Give Treat</button>
+			<div>
+				<button class="view-profile btn btn-info btn-md dog-listing-btn" data-toggle="modal" data-target="#dogModal-{{id}}"><i class="fa fa-paw" aria-hidden="true"></i></button>
+				<button class="btn btn-info btn-md dog-listing-btn treat-btn" data-treatid="{{id}}" data-treats="{{treats}}">Give Treat</button>
+			</div>
 		</div>
 
 	<!-- Modal -->
@@ -118,7 +77,7 @@
 	      </div>
 		    <div class="modal-body">
 
-					<img class= "dog-image" src='{{image}}.jpg'>
+					<img class= "dog-image" src="/uploads/{{image}}">
 
 					<ul class="chart">
 						<p class="chart-key">0% = Low | 25% = Moderate | 50% = Average | 75% = Above Avg | 100% = High
@@ -167,49 +126,10 @@
 	</div>
 
 	{{/each}}
+	</div>
 </div> <!-- End Row -->
+</div>
 
 <footer class="main-footer"></footer>
-
-<script>
-
-$(".treat-btn").on("click", function() {
-		var id = $(this).data("treatid");
-		// console.log("id ", id);
-		var currentTreats = $(this).data("treats");
-		// console.log("currentTreats ", currentTreats);
-		var addedTreats = (currentTreats + 1);
-		// console.log("addedTreats ", addedTreats);
-
-		var updatedTreats = {
-			treats: addedTreats
-		};
-
-		$.ajax("/api/dogs/" + id, {
-			type: "PUT",
-			data: updatedTreats
-		}).then(function() {
-			console.log("updated id ", id);
-			location.reload();
-			});
-});
-
-
-</script>
-
-<script id="image-template" type="text/x-handlebars-template">
-    <img class="dog-image" src="../{{image}}">
-</script>
-
-<script>
-$(document).ready(function() {
-	var imageTemplate = $("#image-template").html().trim();
-	console.log("imageTemplate: ", imageTemplate);
-	// Handlebars.compile(imageTemplate);
-
-	var compiledImageTemplate = Handlebars.compile(imageTemplate);
-	$(".compiled-image").html(compiledImageTemplate());
-});
-</script>
 
 
