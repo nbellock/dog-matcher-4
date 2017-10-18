@@ -63,27 +63,39 @@ a:hover {
 }
 
 #myNavbar {
-/*	text-align: left;*/
+	text-align: left;
 }
 
 
 /*********** Main ***********/
+.filterDiv {
+/*	display: none;*/
+}
+
+.show {
+	display: block;
+}
+
 
 #logo {
-	font-size: 50px;
-	letter-spacing: 10px;
-	text-align: center;
-	margin-bottom: 25px;
-	font-family: 'Playfair Display', serif;
+height: 80px;
+width: auto;
+margin: 0 auto;
+text-align: center;
 }
 
 .container {
 	height: 100vh;
 }
 
+.col-md-3, .col-xs-12 {
+	padding-right: 2px;
+	padding-left: 2px;
+}
+ 
 .dog-image {
-	height: 200px;
-	width: 210px;
+	height: 180px;
+	width: 180px;
 	border: 2px solid #000;
 }
 
@@ -91,7 +103,15 @@ a:hover {
 	margin-top: 20px;
 }
 
-#filter-dogs-block {
+.filter-btn {
+	margin: -40px 0px 40px 15px;
+}
+
+.show-all-btn {
+	margin: -40px 0px 40px 0px;
+}
+
+#filter-dogs {
 	height: 200px;
 	margin-top: -35px;
 	margin-bottom: 5px;
@@ -99,16 +119,41 @@ a:hover {
 	background-color: #8caed8;
 }
 
+#filter-dogs input {
+	margin-right: 5px;
+}
+
+#filter-dogs label, #filter-dogs input {
+	cursor: pointer;
+}
+
+#filter-dogs ul {
+	height: 200px;
+	padding-top: 10px;
+	margin-left: -20px;
+	margin-right: 0;
+	width: 105%;
+}
+
+#filter-dogs li {
+	list-style: none;
+}
+
 .all-dogs-listings {
-	margin-top: 30px;
 	margin-bottom: 80px;
-	display: inline-block;
+	margin-left: 0;
+	margin-right: 0;
 	width: 100%;
-	float: left;
+}
+
+.dog-listing-col {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .dog-listing {
-	margin-top: 20px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .dog-listing-title {
@@ -117,6 +162,11 @@ a:hover {
 
 .dog-listing-btn {
 	margin-top: 8px;
+}
+
+.dog-filter-btn {
+	margin-top: 15px;
+	text-align: left;
 }
 
 .index-background {
@@ -353,4 +403,23 @@ form .likert li label {width:100%;} {
   padding:0 4.25%;
   text-align:right
 } 
+
+
+@media only screen and (max-width: 991px) {
+
+	#filter-dogs {
+		height: 280px;
+	}
+
+	.dog-listing {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+
+	#filter-dogs {
+		height: 400px;
+	}
+}
 

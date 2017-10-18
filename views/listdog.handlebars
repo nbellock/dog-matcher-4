@@ -4,23 +4,57 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center survey-header">Create Your Dog's Profile</h2>
-        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+        <form id="uploadForm" enctype="multipart/form-data">
           <input type="file" name="userPhoto" id="choose-file"/>
-          <input type="submit" value="Upload Image" id="upload-image" name="submit">
+          <input type="button" value="Upload" id="upload-image">
           <p class="success-message"></p>
+          <div><img class="preview" src="/uploads/{{filename}}"></div>
         </form>
+        <progress></progress>
         <div class="wrap">
-          <form id="dogSurvey" name="dog-survey" action="api/new" method="POST">
+          <form id="dogSurvey" name="dog-survey">
             <label class="statement dog-name">What is your dog's name?</label>
             <ul class='q1 dog-name'>
               <input type="text" name="name" required></li>
             </ul>
             <hr>
+
+        <label class="statement breed">What is the breed of your dog?</label>
+        <select class="form-control">
+          <option class="Basset Hound">Basset Hound</option>
+          <option class="Beagle">Beagle</option>
+          <option class="Boxer">Boxer</option>
+          <option class="Bull Dog">Bull Dog</option>
+          <option class="Dalmation">Dalmation</option>
+          <option class="Doberman">Doberman</option>
+          <option class="Cockapoo">Cockapoo</option>
+          <option class="Collie">Collie</option>    
+          <option class="Foxhound">Foxhound</option>                
+          <option class="German Shepherd">German Shepherd</option>                
+          <option class="Golden Retriever">Golden Retriever</option>                
+          <option class="Goldendoodle">Goldendoodle</option>                
+          <option class="Greyhound">Greyhound</option>                
+          <option class="Maltese">Maltese</option>                
+          <option class="Mutt">Mutt</option>                
+          <option class="Pit Bull">Pit Bull</option>                
+          <option class="Pomeranian">Pomeranian</option>                
+          <option class="Poodle">Poodle</option>                
+          <option class="Portuguese Water Dog">Portuguese Water Dog</option>                
+          <option class="Pug">Pug</option>                
+          <option class="Saint Bernard">Saint Bernard</option>                
+          <option class="Shih Tzu">Shih Tzu</option>                
+          <option class="Siberian Husky">Siberian Husky</option>                
+          <option class="Yorkshire Terrier">Yorkshire Terrier</option>                
+        </select> 
+        <hr>
+        
+{{!-- 
             <label class="statement breed">What is the breed of your dog?</label>
             <ul class='q2 breed'>
               <input type="text" name="breed" required></li>
             </ul>
             <hr>
+ --}}
             <label class="statement zip">What zip code are you and your dog located? (This helps others connect with people and dogs in their area.)</label>
             <ul class='q3 zip'>
               <input type="text" name="zip" required></li>
@@ -99,7 +133,7 @@
               <li><input type="radio" name="q12" value="0" required><label>0-20 lbs</label></li>
             </ul>
  
-            <button type="submit" class="btn btn-lg btn-primary" id="submit" data-toggle="modal">Submit</button>
+            <button type="button" class="btn btn-lg btn-primary" id="submit">Submit</button>
             <br>
             <p class="error-message"></p>
 
@@ -118,37 +152,40 @@ $("#upload-image").on("click", function() {
   $(".success-message").html("Image uploaded successfully!");
 });
 
-console.log($("#choose-file").val());
+$('#upload-image').on('click', function() {
+    $.ajax({
+        // Your server script to process the upload
+        url: '/api/photo/',
+        type: 'POST',
 
-// $("#dogSurvey").on("submit", function(event) {
-//   event.preventDefault();  
-//   var answers = {
-//     name: 
-//     breed:
-//     zip:
-//     gender:
-//     likert: {
+        // Form data
+        data: new FormData($('#uploadForm')[0]),
 
-//       for (var i = 0; i < q[number].length; i++) {
-//         q[number][i]
-//       }
-//     }
+        // Tell jQuery not to process data or worry about content-type
+        // You *must* include these options!
+        cache: false,
+        contentType: false,
+        processData: false,
 
-//   };
-
-//     $()
-
-//   $.ajax({
-//     url: "/api/photo", 
-//     method: "post", 
-//     data: 
-
-
-//   });
-
-// });
-
-
+        // Custom XMLHttpRequest
+        xhr: function() {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                // For handling the progress of the upload
+                myXhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        $('progress').attr({
+                            value: e.loaded,
+                            max: e.total,
+                        });
+                    }
+                } , false);
+            }
+            return myXhr;
+        },
+    }).then(function(result) {
+    });
+});
 
 
 
