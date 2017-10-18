@@ -8,7 +8,7 @@
           <input type="file" name="userPhoto" id="choose-file"/>
           <input type="button" value="Upload" id="upload-image">
           <p class="success-message"></p>
-          <div><img class="preview" src="/uploads/{{filename}}"></div>
+          <div class="preview"></div>
         </form>
         <progress></progress>
         <div class="wrap">
@@ -19,7 +19,7 @@
             </ul>
             <hr>
 
-        <label class="statement breed">What is the breed of your dog?</label>
+{{!--         <label class="statement breed">What is the breed of your dog?</label>
         <select class="form-control">
           <option class="Basset Hound">Basset Hound</option>
           <option class="Beagle">Beagle</option>
@@ -46,15 +46,15 @@
           <option class="Siberian Husky">Siberian Husky</option>                
           <option class="Yorkshire Terrier">Yorkshire Terrier</option>                
         </select> 
-        <hr>
+        <hr> --}}
         
-{{!-- 
+
             <label class="statement breed">What is the breed of your dog?</label>
             <ul class='q2 breed'>
               <input type="text" name="breed" required></li>
             </ul>
             <hr>
- --}}
+
             <label class="statement zip">What zip code are you and your dog located? (This helps others connect with people and dogs in their area.)</label>
             <ul class='q3 zip'>
               <input type="text" name="zip" required></li>
@@ -146,47 +146,3 @@
 
 <footer class="main-footer"></footer>
 
-<script>
-
-$("#upload-image").on("click", function() {
-  $(".success-message").html("Image uploaded successfully!");
-});
-
-$('#upload-image').on('click', function() {
-    $.ajax({
-        // Your server script to process the upload
-        url: '/api/photo/',
-        type: 'POST',
-
-        // Form data
-        data: new FormData($('#uploadForm')[0]),
-
-        // Tell jQuery not to process data or worry about content-type
-        // You *must* include these options!
-        cache: false,
-        contentType: false,
-        processData: false,
-
-        // Custom XMLHttpRequest
-        xhr: function() {
-            var myXhr = $.ajaxSettings.xhr();
-            if (myXhr.upload) {
-                // For handling the progress of the upload
-                myXhr.upload.addEventListener('progress', function(e) {
-                    if (e.lengthComputable) {
-                        $('progress').attr({
-                            value: e.loaded,
-                            max: e.total,
-                        });
-                    }
-                } , false);
-            }
-            return myXhr;
-        },
-    }).then(function(result) {
-    });
-});
-
-
-
-</script>
