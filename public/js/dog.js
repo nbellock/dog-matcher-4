@@ -48,6 +48,7 @@ function url() {
 	urlLoc = urlLoc.replace(window.location.hostname, "");
 
 	urlLoc = urlLoc.replace("/finddog/", "");
+    urlLoc = urlLoc.replace("%20", " ");
 
 	var checkedArray = urlLoc.split("+");
 
