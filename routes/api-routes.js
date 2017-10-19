@@ -5,15 +5,11 @@ var surveyQs = require("../data/surveyQuestions");
 
 module.exports = function(app) {
 
-
-app.post("/api/filter", function(req, res) {
-  var breed = req.body.breed;
-  var stringBreed = breed.join("+");
-  res.redirect("/finddog/" + stringBreed);
-});
-
-
-
+  app.post("/api/filter", function(req, res) {
+    var breed = req.body.breed;
+    var stringBreed = breed.join("+");
+    res.redirect("/finddog/" + stringBreed);
+  });
 
   app.post("/api/new", function(req, res) {
     db.Dog.create({
@@ -29,14 +25,14 @@ app.post("/api/filter", function(req, res) {
       bark: req.body.q10,
       independence: req.body.q11,
       weight: req.body.q12,
-      image: req.body.imagepath
+      image: req.body.imagepath,
+      OwnerId: req.user.id
     }).then(function(newDog) {
       res.json({id:newDog.dataValues.id});
     });
   });
 
-
-app.post("/api/photo/", function (req, res) {
+  app.post("/api/photo/", function (req, res) {
     if (!req.files) return res.status(400).send('No files were uploaded!');
 
     let currentDogImage = req.files.userPhoto;
@@ -47,28 +43,27 @@ app.post("/api/photo/", function (req, res) {
     });
   });
 
-
-app.put("/api/dogs/:id", function(req, res) {
-  db.Dog.update({
-      treats: req.body.treats
-    }, {
-      where: {
-        id: req.params.id
-      }
-    }).then(function(result) {
-      res.json(result);
-    });
+  app.put("/api/dogs/:id", function(req, res) {
+    db.Dog.update({
+        treats: req.body.treats
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(function(result) {
+        res.json(result);
+      });
   });
 
-app.post('/api/newOwner', function(req, res) {
-  db.OwnerData.create({
-    username: req.body.uname,
-    password: req.body.psw, 
-    firstname: req.body.fn,
-    lastname: req.body.ln,
-    email: req.body.email,
-    address: req.body.address
-     }).then(function() {
+  app.post('/api/newOwner', function(req, res) {
+    db.Owner.create({
+      username: req.body.uname,
+      password: req.body.psw, 
+      firstname: req.body.fn,
+      lastname: req.body.ln,
+      email: req.body.email,
+      address: req.body.address
+    }).then(function() {
       res.redirect("/login");
     }).catch(function(err) {
       console.log(err);
@@ -81,12 +76,11 @@ app.post('/api/newOwner', function(req, res) {
       res.redirect("/listdog");
   });
 
-   app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
-    }
-    else {
+    } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
@@ -96,14 +90,13 @@ app.post('/api/newOwner', function(req, res) {
     }
   });
 
-   app.get("/logout", function(req, res) {
+  app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
 
-
   //new profile
-  app.get("/newprofile/:id", passport.authenticate("local"), function (req, res) {
+  app.get("/newprofile/:id", function (req, res) {
     var id = req.params.id;
     db.Dog.findAll({where:{id:id}}).then(function(result) {
       var hbsObject = {dogdata:[]};
@@ -132,7 +125,7 @@ app.post('/api/newOwner', function(req, res) {
   });
 
 
-app.post('/api/newsurvey', function(req, res) {
+  app.post('/api/newsurvey', function(req, res) {
     var respondentData = req.body;
     var respondentArray = [];
     var storeArray = [];
@@ -204,10 +197,10 @@ app.post('/api/newsurvey', function(req, res) {
     
   });
 
-//not necessary yet, questions are retrieved internally by a simple require statement
-app.get("/api/getsurvquestions", function (req, res) {
-  res.json(surveyQs);
-});
+  //not necessary yet, questions are retrieved internally by a simple require statement
+  app.get("/api/getsurvquestions", function (req, res) {
+    res.json(surveyQs);
+  });
 
   //delete
   app.delete("/api/deletedog/:id", function(req, res) {

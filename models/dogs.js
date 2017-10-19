@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
  Dog.associate = function(models) {
-    Dog.belongsTo(models.OwnerData, {
+    Dog.belongsTo(models.Owner, {
       foreignKey: {
         allowNull: false
         }
