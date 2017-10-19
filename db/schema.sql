@@ -1,5 +1,5 @@
-create database dogs_db;
-use dogs_db;
+create database sdyeksdp5nh5lxf7;
+use sdyeksdp5nh5lxf7;
 
 
 CREATE TABLE ownerdata
@@ -16,7 +16,7 @@ CREATE TABLE ownerdata
 
 CREATE TABLE Dogs
 (
-	id INT AUTO_INCREMENT NOT NULL ,
+	id INT AUTO_INCREMENT NOT NULL,
     owner_name varchar(50) NOT NULL,
     breed varchar(50) NOT NULL,
     location varchar(5),
@@ -37,7 +37,7 @@ CREATE TABLE Dogs
 
 CREATE TABLE Users
 (
-    id INT AUTO_INCREMENT NOT NULL ,
+    id INT AUTO_INCREMENT NOT NULL,
     name varchar(50) NOT NULL,
     location varchar(5),
     shedding int NOT NULL DEFAULT 0,

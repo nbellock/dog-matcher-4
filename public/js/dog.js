@@ -65,6 +65,7 @@ function url() {
 	$(".dog-filter-btn").on("click", function() {
 
 	var allCheckedDogs = [];
+
 	var formData = $("#filter-dogs").serializeArray();
 	console.log(formData);
 
@@ -77,9 +78,13 @@ function url() {
 	}
 
 	  var stringBreed = allCheckedDogs.join("+");
+      // stringBreedSpaces = stringBreed.replace(/\s/g, "");
+
+        console.log(stringBreed);
+        // console.log(stringBreedSpaces);
 		window.location = "/finddog/" + stringBreed;
 
-});
+    });
 
 
 	$(".show-all-btn").on("click", function() {
@@ -178,7 +183,8 @@ function url() {
     });
 
     //New Profile - delete
-    $("#btn-delete-dog").on("click", function (result) {
+    $(document).on("click", "#btn-delete-dog", function(result) {
+    // $("#btn-delete-dog").on("click", function (result) {
         var id = $(this).attr("data-id");
         $.ajax({
             url: "/api/deletedog/" + id,

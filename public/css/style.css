@@ -20,7 +20,7 @@ body {
 
 
 /*********** Global ***********/
-h2 {
+h1, h2 {
 	font-family: 'Playfair Display', serif;
 	line-height: 1.2;
 }
@@ -105,9 +105,8 @@ a:hover {
 }
  
 .dog-image {
-	height: 180px;
-	width: 180px;
-	border: 2px solid #000;
+	height: 220px;
+	width: 220px;
 }
 
 .dogs-for-info {
@@ -219,6 +218,10 @@ a:hover {
 	color: #fff;
 }
 
+.register-btn a {
+	font-size: 17px;
+}
+
 .main-button:hover, #submit:hover {
 	background-color: #60c0dd;
 	border: 2px solid #60c0dd;
@@ -259,7 +262,18 @@ a:hover {
 	margin-left: -4%;
 }
 
+.input-group {
+	margin-top: 5px;
+}
 
+
+.select {
+	margin-bottom: 10px;
+}
+
+.input-group .form-control {
+	margin-top: 0;
+}
 
 /* MODAL BAR CHART
 /******************************************************/
@@ -345,34 +359,6 @@ a:hover {
 .breed input, .dog-name input, .zip input {
  	width: 300px;
  	height: 30px;
-}
-
-#upload-image {
-	height: 30px;
-	border-radius: 5%;
-	border: 2px solid #063166;
-	background-color: #063166;
-	color: #fff;
-	margin-top: 15px;
-}
-
-#upload-image:hover {
-	background-color: #60c0dd;
-	border: 2px solid #60c0dd;
-}
-
-#choose-file {
-	height: 30px;
-	cursor: pointer;
-}
-
-#uploadForm input[type=file] {
-	font-size: 16px;
-	cursor: pointer;
-}
-
-#uploadForm {
-	margin-left: 4%;
 }
 
 #submit {
@@ -461,4 +447,3 @@ form .likert li label {width:100%;} {
 		width: 90%;
 	}
 }
-

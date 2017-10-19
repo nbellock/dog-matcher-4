@@ -17,19 +17,23 @@ module.exports = function(app){
     res.render("usersurvey", hbsObject);
   });
 
-
   app.get("/listdog", isAuthenticated, function(req, res) {
       res.render("listdog");
   });
 
-  app.get("/listdog", function(req, res) {
-    res.render("listdog");
+  app.get("/mypetprofiles", isAuthenticated, function(req, res) {
+    db.Dog.findAll({where:{OwnerId:req.user.id}}).then(function(result) {
+      var hbsObject = {petdata:[]};
+      for (var i=0; i < result.length; i++) {
+        hbsObject.petdata.push(result[i].dataValues);
+      }
+      res.render("mypetprofiles", hbsObject);
+    });
   });
 
   app.get("/signin", function(req, res){
     res.render("signin");
   });
-
 
   app.get("/login", function(req, res){
     res.render("login");  
@@ -60,7 +64,4 @@ module.exports = function(app){
 
 
 }
-
-
-
 
