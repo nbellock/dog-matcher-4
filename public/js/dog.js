@@ -43,18 +43,24 @@ $(".filter-btn").on("click", function() {
 });
 
 // Filter-breed logic
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 function url() { 
 	var urlLoc = window.location.pathname;
 	urlLoc = urlLoc.replace(window.location.hostname, "");
 
 	urlLoc = urlLoc.replace("/finddog/", "");
+    urlLoc = urlLoc.replaceAll("%20", " ");
 
 	var checkedArray = urlLoc.split("+");
 
 	$.each($("form[name=filter-dogs] input:checkbox"), function () {
 		console.log( checkedArray.indexOf(this.value) );
  		if ( checkedArray.indexOf(this.value) >= 0 ) {
- 			$(':checkbox[value=' + this.value + ']').attr('checked', true);
+ 			$(':checkbox[value="' + this.value + '"]').attr('checked', true);
  		}
  		$("#filter-dogs").show();
 		$(".show-all-btn").show();
