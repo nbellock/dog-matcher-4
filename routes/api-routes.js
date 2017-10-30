@@ -37,7 +37,7 @@ module.exports = function(app) {
 
     let currentDogImage = req.files.userPhoto;
     var filename = req.files.userPhoto.name;
-    currentDogImage.mv('uploads/' + filename, function (err) {
+    currentDogImage.mv('/uploads/' + filename, function (err) {
       res.send(filename);
     });
   });
