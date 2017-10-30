@@ -160,7 +160,7 @@ function url() {
             },
         }).then(function (result) {
             $("#imagepath").val(result);
-            $("#dog-preview").attr("src", "/uploads/" + result);
+            $("#dog-preview").attr("src", "http://s3.amazonaws.com/dogspotter-aws-bucket/" + result);
             $("#dog-preview-container").show();
         });
     });
