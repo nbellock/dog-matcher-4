@@ -56,7 +56,7 @@
 			<p class="dog-listing-title">{{owner_name}} | Breed: {{breed}}</p>
 			<p>Treats: {{treats}}</p>
 
-			<img class="dog-image" src="https://s3.amazonaws.com/dogspotter-aws-bucket/{{image}}">
+			<img class="dog-image" src="http://s3.amazonaws.com/dogspotter-aws-bucket/{{image}}">
 
 			<div>
 				<button class="view-profile btn btn-info btn-md dog-listing-btn" data-toggle="modal" data-target="#dogModal-{{id}}"><i class="fa fa-paw" aria-hidden="true"></i></button>
@@ -77,7 +77,7 @@
 	      </div>
 		    <div class="modal-body">
 
-					<img class= "dog-image" src="https://s3.amazonaws.com/dogspotter-aws-bucket/{{image}}">
+					<img class= "dog-image" src="http://s3.amazonaws.com/dogspotter-aws-bucket/{{image}}">
 
 					<ul class="chart">
 						<p class="chart-key">0% = Low | 25% = Moderate | 50% = Average | 75% = Above Avg | 100% = High
