@@ -13,94 +13,112 @@ $(document).ready(function () {
 // Give treat button
 // Updates the treats column in the database
 $(".treat-btn").on("click", function() {
-	var id = $(this).data("treatid");
-		// console.log("id ", id);
-	var currentTreats = $(this).data("treats");
-		// console.log("currentTreats ", currentTreats);
-	var addedTreats = (currentTreats + 1);
-		// console.log("addedTreats ", addedTreats);
+    var id = $(this).data("treatid");
+        // console.log("id ", id);
+    var currentTreats = $(this).data("treats");
+        // console.log("currentTreats ", currentTreats);
+    var addedTreats = (currentTreats + 1);
+        // console.log("addedTreats ", addedTreats);
 
-	var updatedTreats = {
-		treats: addedTreats
-		};
+    var updatedTreats = {
+        treats: addedTreats
+        };
 
-		$.ajax("/api/dogs/" + id, {
-			type: "PUT",
-			data: updatedTreats
-		}).then(function() {
-			console.log("updated id ", id);
-			location.reload();
-		});
-	});
+        $.ajax("/api/dogs/" + id, {
+            type: "PUT",
+            data: updatedTreats
+        }).then(function() {
+            console.log("updated id ", id);
+            location.reload();
+        });
+    });
 
 
 $("#filter-dogs").hide();
 $(".show-all-btn").hide();
 
 $(".filter-btn").on("click", function() {
-	$("#filter-dogs").toggle();
-	$(".show-all-btn").toggle();
+    $("#filter-dogs").toggle();
+    $(".show-all-btn").toggle();
 });
 
 // Filter-breed logic
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 function url() { 
-	var urlLoc = window.location.pathname;
-	urlLoc = urlLoc.replace(window.location.hostname, "");
+    var urlLoc = window.location.pathname;
+    urlLoc = urlLoc.replace(window.location.hostname, "");
 
+<<<<<<< HEAD
+    urlLoc = urlLoc.replace("/finddog/", "");
+=======
 	urlLoc = urlLoc.replace("/finddog/", "");
+>>>>>>> ed266baf955bcb2bf7a9f8381a4468726eb08864
+    urlLoc = urlLoc.replaceAll("%20", " ");
 
-	var checkedArray = urlLoc.split("+");
+    var checkedArray = urlLoc.split("+");
 
+<<<<<<< HEAD
+    $.each($("form[name=filter-dogs] input:checkbox"), function () {
+        console.log( checkedArray.indexOf(this.value) );
+        if ( checkedArray.indexOf(this.value) >= 0 ) {
+            $(':checkbox[value="' + this.value + '"]').attr('checked', true);
+        }
+        $("#filter-dogs").show();
+        $(".show-all-btn").show();
+    });
+    }
+    url();
+=======
 	$.each($("form[name=filter-dogs] input:checkbox"), function () {
 		console.log( checkedArray.indexOf(this.value) );
  		if ( checkedArray.indexOf(this.value) >= 0 ) {
- 			$(':checkbox[value=' + this.value + ']').attr('checked', true);
+ 			$(':checkbox[value="' + this.value + '"]').attr('checked', true);
  		}
  		$("#filter-dogs").show();
 		$(".show-all-btn").show();
 	});
 	}
 	url();
+>>>>>>> ed266baf955bcb2bf7a9f8381a4468726eb08864
 
-	$(".dog-filter-btn").on("click", function() {
+    $(".dog-filter-btn").on("click", function() {
 
-	var allCheckedDogs = [];
+    var allCheckedDogs = [];
+    var formData = $("#filter-dogs").serializeArray();
+    console.log(formData);
 
-	var formData = $("#filter-dogs").serializeArray();
-	console.log(formData);
+    for (var i = 0; i < formData.length; i++) {
+        allCheckedDogs.push(formData[i].value);
+    }
 
-	for (var i = 0; i < formData.length; i++) {
-		allCheckedDogs.push(formData[i].value);
-	}
+    var allDogs = {
+        breed: allCheckedDogs
+    }
 
-	var allDogs = {
-		breed: allCheckedDogs
-	}
+      var stringBreed = allCheckedDogs.join("+");
+        window.location = "/finddog/" + stringBreed;
 
-	  var stringBreed = allCheckedDogs.join("+");
-      // stringBreedSpaces = stringBreed.replace(/\s/g, "");
+});
 
-        console.log(stringBreed);
-        // console.log(stringBreedSpaces);
-		window.location = "/finddog/" + stringBreed;
+
+    $(".show-all-btn").on("click", function() {
+            $(':checkbox').attr('checked', false);
+            var allCheckedDogs = [];
+
+            var allDogs = {
+                breed: allCheckedDogs
+            }
+            var stringBreed = allCheckedDogs.join("+");
+            window.location = "/finddog/" + stringBreed;
 
     });
 
 
-	$(".show-all-btn").on("click", function() {
- 			$(':checkbox').attr('checked', false);
-			var allCheckedDogs = [];
-
-			var allDogs = {
-				breed: allCheckedDogs
-			}
-			var stringBreed = allCheckedDogs.join("+");
-			window.location = "/finddog/" + stringBreed;
-
-	});
-
-
-		// RAY 
+        // RAY 
     $("#dog-preview-container").hide();
 
     // Watch for custom `fileselect` event
@@ -183,8 +201,7 @@ function url() {
     });
 
     //New Profile - delete
-    $(document).on("click", "#btn-delete-dog", function(result) {
-    // $("#btn-delete-dog").on("click", function (result) {
+    $("#btn-delete-dog").on("click", function (result) {
         var id = $(this).attr("data-id");
         $.ajax({
             url: "/api/deletedog/" + id,

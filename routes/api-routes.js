@@ -36,9 +36,8 @@ module.exports = function(app) {
     if (!req.files) return res.status(400).send('No files were uploaded!');
 
     let currentDogImage = req.files.userPhoto;
-    var randomNum = Math.floor(Math.random() * 50000);
-    var filename = randomNum + req.files.userPhoto.name;
-    currentDogImage.mv('./public/uploads/' + filename, function (err) {
+    var filename = req.files.userPhoto.name;
+    currentDogImage.mv('http://s3.amazonaws.com/bucketname/' + filename, function (err) {
       res.send(filename);
     });
   });
