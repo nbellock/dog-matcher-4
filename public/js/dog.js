@@ -68,16 +68,6 @@ function url() {
     }
     url();
 
-	$.each($("form[name=filter-dogs] input:checkbox"), function () {
-		console.log( checkedArray.indexOf(this.value) );
- 		if ( checkedArray.indexOf(this.value) >= 0 ) {
- 			$(':checkbox[value="' + this.value + '"]').attr('checked', true);
- 		}
- 		$("#filter-dogs").show();
-		$(".show-all-btn").show();
-	});
-	}
-	url();
 
     $(".dog-filter-btn").on("click", function() {
 
