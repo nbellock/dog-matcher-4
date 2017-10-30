@@ -52,16 +52,11 @@ function url() {
     var urlLoc = window.location.pathname;
     urlLoc = urlLoc.replace(window.location.hostname, "");
 
-<<<<<<< HEAD
     urlLoc = urlLoc.replace("/finddog/", "");
-=======
-	urlLoc = urlLoc.replace("/finddog/", "");
->>>>>>> ed266baf955bcb2bf7a9f8381a4468726eb08864
     urlLoc = urlLoc.replaceAll("%20", " ");
 
     var checkedArray = urlLoc.split("+");
 
-<<<<<<< HEAD
     $.each($("form[name=filter-dogs] input:checkbox"), function () {
         console.log( checkedArray.indexOf(this.value) );
         if ( checkedArray.indexOf(this.value) >= 0 ) {
@@ -72,7 +67,7 @@ function url() {
     });
     }
     url();
-=======
+
 	$.each($("form[name=filter-dogs] input:checkbox"), function () {
 		console.log( checkedArray.indexOf(this.value) );
  		if ( checkedArray.indexOf(this.value) >= 0 ) {
@@ -83,7 +78,6 @@ function url() {
 	});
 	}
 	url();
->>>>>>> ed266baf955bcb2bf7a9f8381a4468726eb08864
 
     $(".dog-filter-btn").on("click", function() {
 
