@@ -12,11 +12,13 @@ var fileUpload = require("express-fileupload");
 var methodOverride = require("method-override");
 var session = require("express-session");
 var passport = require("./config/passport");
+const aws = require('aws-sdk');
 
 // Sets up the Express App
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 8080;
+const S3_BUCKET = process.env.S3_BUCKET;
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -39,6 +41,9 @@ app.use(passport.session());
 
 // Static directory
 app.use(express.static("public"));
+
+// Configure AWS S3
+aws.config.region = 'us-east-1';
 
 // Routes
 // =============================================================
