@@ -185,7 +185,7 @@ function url() {
     });
 
     //New Profile - delete
-    $("#btn-delete-dog").on("click", function (result) {
+   $(document).on("click", "#btn-delete-dog", function (result) {
         var id = $(this).attr("data-id");
         $.ajax({
             url: "/api/deletedog/" + id,
