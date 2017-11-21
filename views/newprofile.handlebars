@@ -1,3 +1,8 @@
+http://dogspotter.herokuapp.com/newprofile/uploads/1bulldog.png
+http://dogspotter.herokuapp.com/uploads/1greyhound.png
+http://dogspotter.herokuapp.com/uploads/1bassethound.png
+http://dogspotter.herokuapp.com/newprofile/uploads/1bulldog.png
+
 <div class="container">
 <div class="row">
 	<h1>Your Pet Profile</h1>
@@ -7,7 +12,7 @@
 		<button class="btn btn-lg btn-primary" id="btn-delete-dog" data-id="{{this.id}}">Delete Profile</button>
 		<h2 class="title">{{this.owner_name}}</h2>
 	  <h4 class="sub-title">Breed: {{this.breed}} | Location: {{location}}</h4>
-		<img class= "dog-image" src='uploads/{{image}}'>
+		<img class= "dog-image" src='./uploads/{{image}}'>
 	</div>
 	<div class="col-md-8">
 		<ul class="chart">
